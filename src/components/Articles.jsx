@@ -1,26 +1,54 @@
-export default function Articles({ topic }) {
-  if (!topic) {
-    topic = "All";
-  }
+import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+export default function Articles() {
+  const { topic } = useParams();
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(false);
+
+    let url = "https://nc-news-hn5t.onrender.com/api/articles";
+    if (topic !== undefined) {
+      url += `?topic=${topic}`;
+    }
+
+    axios
+      .get(`${url}`)
+      .then(({ data }) => {
+        setArticles(data.articles);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(true);
+        setLoading(false);
+      });
+  }, [topic]);
+
+  if (loading) return <span>Loading...</span>;
+  if (error) return <span>Oh no! Something went wrong!</span>;
+
   return (
     <>
-      <h1>Showing {topic} Articles</h1>
+      <h1>Showing {topic || "all"} articles</h1>
       <div className="article">
-        <div className="article-container">
-          <h2>Article Name</h2>
-          <h4>[sport]</h4>
-          <img src="https://images.pexels.com/photos/2403392/pexels-photo-2403392.jpeg?w=700&h=700" />
-        </div>
-        <div className="article-container">
-          <h2>Article Name</h2>
-          <h4>[sport]</h4>
-          <img src="https://images.pexels.com/photos/2403392/pexels-photo-2403392.jpeg?w=700&h=700" />
-        </div>
-        <div className="article-container">
-          <h2>Article Name</h2>
-          <h4>[sport]</h4>
-          <img src="https://images.pexels.com/photos/2403392/pexels-photo-2403392.jpeg?w=700&h=700" />
-        </div>
+        {articles.map((article) => {
+          return (
+            <Link
+              key={article.article_id}
+              to={`/articles/${article.article_id}`}
+              className="article-container"
+            >
+              <h2>{article.title}</h2>
+              <h4>{article.topic}</h4>
+              <img src={article.article_img_url} />
+            </Link>
+          );
+        })}
       </div>
     </>
   );
