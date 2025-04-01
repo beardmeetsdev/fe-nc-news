@@ -1,3 +1,4 @@
+import Votes from "./Votes";
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -37,7 +38,7 @@ export default function ArticleCard() {
         <p>{article.body}</p>
         <img src={article.article_img_url} alt={article.title} />
         <div>Comment Count: {article.comment_count}</div>
-        <div>Votes: {article.votes}</div>
+        <Votes article_id={article.article_id} currentVotes={article.votes} />
       </div>
     </div>
   );
