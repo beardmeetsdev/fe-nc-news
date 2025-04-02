@@ -36,19 +36,21 @@ export default function Articles() {
     <>
       <h1>Showing {topic || "all"} articles</h1>
       <div className="article">
-        {articles.map((article) => {
-          return (
-            <Link
-              key={article.article_id}
-              to={`/articles/${article.article_id}`}
-              className="article-container"
-            >
-              <h2>{article.title}</h2>
-              <h4>{article.topic}</h4>
-              <img src={article.article_img_url} />
-            </Link>
-          );
-        })}
+        {articles.map((article) => (
+          <Link
+            key={article.article_id}
+            to={`/articles/${article.article_id}`}
+            className="article-container"
+          >
+            <h2 className="article-title">{article.title}</h2>
+            <img
+              src={article.article_img_url}
+              alt={article.title}
+              className="article-img"
+            />
+            <p className="article-topic">Topic: {article.topic}</p>
+          </Link>
+        ))}
       </div>
     </>
   );

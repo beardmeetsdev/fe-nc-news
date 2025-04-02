@@ -26,14 +26,22 @@ export default function Votes({ article_id, currentVotes }) {
   }
 
   return (
-    <>
-      <div>Votes {votes}</div>
-      <button onClick={() => updateVotes(-1)} disabled={loading}>
+    <div className="button-format">
+      <button
+        className="bespoke-button"
+        onClick={() => updateVotes(-1)}
+        disabled={loading}
+      >
         -
       </button>
-      <button onClick={() => updateVotes(1)} disabled={loading}>
+      <div>{votes}</div>
+      <button
+        className="bespoke-button"
+        onClick={() => updateVotes(1)}
+        disabled={loading}
+      >
         +
       </button>
-    </>
+    </div>
   );
 }
