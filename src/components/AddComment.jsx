@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function CommentList({ article_id, author }) {
+export default function CommentList({ article_id, author, user }) {
   const [commentBody, setCommentBody] = useState("");
   const [posted, setPosted] = useState(false);
 
@@ -31,19 +31,22 @@ export default function CommentList({ article_id, author }) {
 
   return (
     <>
-      <form className="comment-form" onSubmit={handleSubmit}>
-        <textarea
-          type="text"
-          name="newcomment"
-          onChange={handleChange}
-          value={commentBody}
-        />
-
-        <button className="bespoke-button" type="submit">
-          + add comment
-        </button>
-      </form>
-      {posted ? <span className="form-popup">Comment posted :)</span> : null}
+      {user ? (
+        <form className="comment-form" onSubmit={handleSubmit}>
+          <textarea
+            type="text"
+            name="newcomment"
+            onChange={handleChange}
+            value={commentBody}
+          />
+          <button className="bespoke-button" type="submit">
+            + add comment
+          </button>
+          {posted ? (
+            <span className="form-popup">Comment posted :)</span>
+          ) : null}
+        </form>
+      ) : null}
     </>
   );
 }

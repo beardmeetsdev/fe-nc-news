@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function ArticleList() {
+export default function ArticleList({ user }) {
+  console.log(user);
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(true);
@@ -39,9 +40,17 @@ export default function ArticleList() {
       <p>{article.body}</p>
       <img src={article.article_img_url} alt={article.title} />
       <div className="comment-format">{article.comment_count} Comments</div>
-      <Votes article_id={article.article_id} currentVotes={article.votes} />
-      <AddComment article_id={article.article_id} author={article.author} />
-      <CommentList article_id={article.article_id} />
+      <Votes
+        article_id={article.article_id}
+        currentVotes={article.votes}
+        user={user}
+      />
+      <AddComment
+        article_id={article.article_id}
+        author={article.author}
+        user={user}
+      />
+      <CommentList article_id={article.article_id} user={user} />
     </div>
   );
 }
