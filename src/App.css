@@ -8,11 +8,27 @@
 .header {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 40px;
+  color: rgb(87, 22, 96);
 }
 
 .header img {
   height: 50px;
   width: 50px;
+}
+.topics-nav {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.topics-nav button {
+  background-color: rgb(87, 22, 96);
+  font-size: medium;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .article {
@@ -91,7 +107,7 @@
   border-radius: 20px;
   background-color: rgb(235, 235, 235);
   font-size: small;
-  padding: 4px 9px;
+  padding: 5px 9px;
 }
 
 .button-format {
@@ -112,4 +128,16 @@
   font-size: 0.85rem;
   margin-top: 8px;
   display: block;
+}
+
+.comment-form {
+  display: flex;
+  gap: 10px;
+}
+
+.delete button {
+  background-color: rgb(255, 145, 145);
+  font-size: small;
+  font-weight: bolder;
+  color: rgb(97, 97, 97);
 }

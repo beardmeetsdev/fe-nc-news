@@ -30,18 +30,20 @@ export default function CommentList({ article_id, author }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <textarea
-        type="text"
-        name="newcomment"
-        onChange={handleChange}
-        value={commentBody}
-      />
-      {posted ? <span className="form-popup">Comment posted :)</span> : null}
+    <>
+      <form className="comment-form" onSubmit={handleSubmit}>
+        <textarea
+          type="text"
+          name="newcomment"
+          onChange={handleChange}
+          value={commentBody}
+        />
 
-      <button className="bespoke-button" type="submit">
-        + add comment
-      </button>
-    </form>
+        <button className="bespoke-button" type="submit">
+          + add comment
+        </button>
+      </form>
+      {posted ? <span className="form-popup">Comment posted :)</span> : null}
+    </>
   );
 }

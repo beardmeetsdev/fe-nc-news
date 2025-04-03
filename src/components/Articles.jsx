@@ -35,6 +35,13 @@ export default function Articles() {
   return (
     <>
       <h1>Showing {topic || "all"} articles</h1>
+      <p>sort by</p>
+      <select>
+        <option>date</option>
+        <option>comment count</option>
+        <option>vtes</option>
+      </select>
+
       <div className="article">
         {articles.map((article) => (
           <Link
