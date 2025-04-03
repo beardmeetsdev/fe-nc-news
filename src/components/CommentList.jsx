@@ -2,7 +2,7 @@ import Votes from "./Votes";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function CommentList({ article_id }) {
+export default function CommentList({ article_id, user }) {
   const [comments, setComments] = useState([]);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
 
@@ -42,24 +42,33 @@ export default function CommentList({ article_id }) {
               {comment.author} - {comment.created_at}
             </p>
             <p>{comment.body}</p>
-            <div className="delete">
-              <button onClick={() => setConfirmDeleteId(comment.comment_id)}>
-                delete comment
-              </button>
-            </div>
-            {confirmDeleteId === comment.comment_id ? (
-              <div className="delete-confirm">
-                <p>Are you sure?</p>
-                <button onClick={() => deleteComment(comment.comment_id)}>
-                  yes
-                </button>
-                <button onClick={() => setConfirmDeleteId(null)}>no</button>
-              </div>
+
+            {user ? (
+              <>
+                <div className="delete">
+                  <button
+                    onClick={() => setConfirmDeleteId(comment.comment_id)}
+                  >
+                    delete comment
+                  </button>
+                </div>
+                {confirmDeleteId === comment.comment_id ? (
+                  <div className="delete-confirm">
+                    <p>Are you sure?</p>
+                    <button onClick={() => deleteComment(comment.comment_id)}>
+                      yes
+                    </button>
+                    <button onClick={() => setConfirmDeleteId(null)}>no</button>
+                  </div>
+                ) : null}
+              </>
             ) : null}
+
             <p>{comment.vote}</p>
             <Votes
               article_id={comment.article_id}
               currentVotes={comment.votes}
+              user={user}
             />
           </div>
         ))}

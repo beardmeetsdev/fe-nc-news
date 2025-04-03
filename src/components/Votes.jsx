@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export default function Votes({ article_id, currentVotes }) {
+export default function Votes({ article_id, currentVotes, user }) {
   const [votes, setVotes] = useState(currentVotes);
   const [loading, setLoading] = useState(false);
 
@@ -26,22 +26,26 @@ export default function Votes({ article_id, currentVotes }) {
   }
 
   return (
-    <div className="button-format">
-      <button
-        className="bespoke-button"
-        onClick={() => updateVotes(-1)}
-        disabled={loading}
-      >
-        -
-      </button>
-      <div>{votes}</div>
-      <button
-        className="bespoke-button"
-        onClick={() => updateVotes(1)}
-        disabled={loading}
-      >
-        +
-      </button>
-    </div>
+    <>
+      {user ? (
+        <div className="button-format">
+          <button
+            className="bespoke-button"
+            onClick={() => updateVotes(-1)}
+            disabled={loading}
+          >
+            -
+          </button>
+          <div>{votes}</div>
+          <button
+            className="bespoke-button"
+            onClick={() => updateVotes(1)}
+            disabled={loading}
+          >
+            +
+          </button>
+        </div>
+      ) : null}
+    </>
   );
 }
