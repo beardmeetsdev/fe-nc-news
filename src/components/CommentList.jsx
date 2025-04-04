@@ -64,12 +64,11 @@ export default function CommentList({ article_id, user }) {
               </>
             ) : null}
 
-            <p>{comment.vote}</p>
-            <Votes
+            {/* <Votes
               article_id={comment.article_id}
               currentVotes={comment.votes}
               user={user}
-            />
+            /> */}
           </div>
         ))}
       </div>
