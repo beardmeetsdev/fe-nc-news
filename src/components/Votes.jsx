@@ -44,6 +44,7 @@ export default function Votes({ article_id, currentVotes, user }) {
           >
             +
           </button>
+          <div>votes</div>
         </div>
       ) : null}
     </>
