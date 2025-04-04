@@ -67,13 +67,13 @@ export default function Articles() {
         </select>
 
         <img
-          src="../src/assets/arro-up-3100.png"
+          src="./assets/arro-up-3100.png"
           alt="Asc"
           className={order === "asc" ? "active-arrow" : ""}
           onClick={() => handleOrder("asc")}
         />
         <img
-          src="../src/assets/arrow-down-3101.png"
+          src="./assets/arrow-down-3101.png"
           alt="Desc"
           className={order === "desc" ? "active-arrow" : ""}
           onClick={() => handleOrder("desc")}

@@ -1,9 +1,9 @@
 export default function Header({ user, setUser }) {
   let image = "";
   if (!user) {
-    image = "../src/assets/3135715.png";
+    image = "./assets/3135715.png";
   } else {
-    image = "../src/assets/mansmiling.jpg";
+    image = "./assets/mansmiling.jpg";
   }
   function setLogin() {
     user ? setUser(false) : setUser(true);
