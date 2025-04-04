@@ -13,6 +13,7 @@ export default function Articles() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortBy = searchParams.get("sort_by") || "created_at";
+  const order = searchParams.get("order") || "desc";
 
   useEffect(() => {
     setLoading(true);
@@ -23,6 +24,7 @@ export default function Articles() {
 
     if (topic) queries.push(`topic=${topic}`);
     if (sortBy) queries.push(`sort_by=${sortBy}`);
+    if (order) queries.push(`order=${order}`);
 
     if (queries.length) {
       url += `?${queries.join("&")}`;
@@ -38,7 +40,7 @@ export default function Articles() {
         setError(true);
         setLoading(false);
       });
-  }, [topic, sortBy]);
+  }, [topic, sortBy, order]);
 
   if (loading) return <span>Loading...</span>;
   if (error) return <span>Oh no! Something went wrong!</span>;
@@ -48,15 +50,35 @@ export default function Articles() {
     setSearchParams(searchParams);
   }
 
+  function handleOrder(newOrder) {
+    searchParams.set("order", newOrder);
+    setSearchParams(searchParams);
+  }
+
   return (
     <>
       <h1>Showing {topic || "all"} articles</h1>
-      <p>sorted by</p>
-      <select value={sortBy} onChange={handleChange}>
-        <option value="created_at">date</option>
-        <option value="comment_count">comment count</option>
-        <option value="votes">votes</option>
-      </select>
+      <div className="sort">
+        <p>sorted by</p>
+        <select value={sortBy} onChange={handleChange}>
+          <option value="created_at">date</option>
+          <option value="comment_count">comment count</option>
+          <option value="votes">votes</option>
+        </select>
+
+        <img
+          src="../src/assets/arro-up-3100.png"
+          alt="Asc"
+          className={order === "asc" ? "active-arrow" : ""}
+          onClick={() => handleOrder("asc")}
+        />
+        <img
+          src="../src/assets/arrow-down-3101.png"
+          alt="Desc"
+          className={order === "desc" ? "active-arrow" : ""}
+          onClick={() => handleOrder("desc")}
+        />
+      </div>
 
       <div className="article">
         {articles.map((article) => (

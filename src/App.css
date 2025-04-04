@@ -141,3 +141,23 @@
   font-weight: bolder;
   color: rgb(97, 97, 97);
 }
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.sort img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.sort img:hover {
+  opacity: 1;
+}
